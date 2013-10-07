@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
-import org.example.pong.core.com.example.pong.core.events.TouchEvent;
+import org.example.pong.core.events.TouchEvent;
 
 public class PongScreen implements Screen {
 

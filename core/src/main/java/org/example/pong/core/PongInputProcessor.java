@@ -3,8 +3,6 @@ package org.example.pong.core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 
-import org.example.pong.core.com.example.pong.core.events.TouchEvent;
-
 public class PongInputProcessor extends InputAdapter {
 
     public PongInputProcessor() {

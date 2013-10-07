@@ -1,4 +1,4 @@
-package org.example.pong.core.com.example.pong.core.events;
+package org.example.pong.core.events;
 
 public class TouchEvent {
 
