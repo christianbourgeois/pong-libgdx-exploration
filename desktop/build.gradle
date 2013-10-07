@@ -1,0 +1,20 @@
+apply plugin: "java"
+apply plugin: "application"
+
+sourceCompatibility = 1.6
+mainClassName = "org.example.pong.desktop.DesktopLauncher"
+//sourceSets.main.resources.srcDirs = [file("../android/src/main/assets").getAbsolutePath()]
+//
+//// idea doesn't like relative paths outside of content root...
+//tasks.ideaModule.doFirst {
+//    println "huzzs"
+//    sourceSets.main.resources.srcDirs = []
+//}
+
+eclipse.project {
+    name = appName + "-desktop"
+}
+
+run {
+    ignoreExitValue = true
+}
