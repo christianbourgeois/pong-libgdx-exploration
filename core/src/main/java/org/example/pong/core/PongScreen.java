@@ -7,8 +7,12 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 
 import org.example.pong.core.events.TouchEvent;
+
+import javax.inject.Inject;
 
 public class PongScreen implements Screen {
 
@@ -16,7 +20,7 @@ public class PongScreen implements Screen {
     private static final int BOX_VELOCITY_ITERATIONS = 6;
     private static final int BOX_POSITION_ITERATIONS = 2;
 
-    private final SimplePong game;
+    private final Bus bus;
 
     private World world;
 
@@ -24,13 +28,15 @@ public class PongScreen implements Screen {
 
     private Box2DDebugRenderer debugRenderer;
 
-    public PongScreen(SimplePong game) {
+    @Inject
+    public PongScreen(Bus bus) {
         super();
-        this.game = game;
+        this.bus = bus;
     }
 
     @Override
     public void show() {
+        this.bus.register(this);
         this.world = new World(new Vector2(0, 0), true);
         this.camera = this.createCamera();
         this.debugRenderer = new Box2DDebugRenderer();
@@ -51,6 +57,11 @@ public class PongScreen implements Screen {
         this.world.step(BOX_STEP, BOX_VELOCITY_ITERATIONS, BOX_POSITION_ITERATIONS);
     }
 
+    @Subscribe
+    public void onTouch(TouchEvent touchEvent) {
+        Gdx.app.log("TOUCH", "x = " + touchEvent.getScreenX());
+    }
+
     @Override
     public void resize(int width, int height) {}
 
@@ -64,10 +75,8 @@ public class PongScreen implements Screen {
     public void resume() {}
 
     @Override
-    public void dispose() {}
-
-    public void onEvent(TouchEvent event) {
-        Gdx.app.debug("TOUCH", "" + event.getScreenX());
+    public void dispose() {
+        this.bus.unregister(this);
     }
 
     private Camera createCamera() {

@@ -1,6 +1,6 @@
 android {
     buildToolsVersion "17.0"
-    compileSdkVersion 17
+    compileSdkVersion 16
 //    sourceSets {
 //        main {
 //            manifest.srcFile 'AndroidManifest.xml'
@@ -25,26 +25,19 @@ tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
 // called every time gradle gets executed, takes the native dependencies of
 // the natives configuration, and extracts them to the proper libs/ folders
 // so they get packed with the APK.
-//task copyAndroidNatives() {
-//    file("libs/armeabi/").mkdirs();
-//    file("libs/armeabi-v7a/").mkdirs();
-//
-//    configurations.natives.files.each { jar ->
-//        def outputDir = null
-//        if(jar.name.endsWith("natives-armeabi-v7a.jar")) outputDir = file("libs/armeabi-v7a")
-//        if(jar.name.endsWith("natives-armeabi.jar")) outputDir = file("libs/armeabi")
-//        if(outputDir != null) {
-//            def f = file(jar)
-//            def tree = zipTree(f)
-//            println 'tree class = ' + tree.class.name
-//            def filtered = tree.matching { include "*.so" }
-//            filtered.visit {element ->
-//                println "$element.relativePath => $element.file"
-//            }
-//            copy { from filtered into outputDir }
-//        }
-//    }
-//}
+task copyAndroidNatives() {
+    file("libs/armeabi/").mkdirs();
+    file("libs/armeabi-v7a/").mkdirs();
+
+    configurations.natives.files.each { jar ->
+        def outputDir = null
+        if(jar.name.endsWith("natives-armeabi-v7a.jar")) outputDir = file("libs/armeabi-v7a")
+        if(jar.name.endsWith("natives-armeabi.jar")) outputDir = file("libs/armeabi")
+        if(outputDir != null) {
+ //           copy { from zipTree(file(jar)).matching { include "*.so" } into outputDir }
+        }
+    }
+}
 
 // sets up the Android Eclipse project, using the old Ant based build.
 eclipse {

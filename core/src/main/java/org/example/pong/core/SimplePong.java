@@ -2,21 +2,36 @@ package org.example.pong.core;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.FPSLogger;
+
+import org.example.pong.core.module.PongModule;
+
+import javax.inject.Inject;
+
+import dagger.ObjectGraph;
 
 public class SimplePong extends Game {
 	
 	public static final int DEFAULT_WIDTH = 480;
 	public static final int DEFAULT_HEIGHT = 320;
 
-    private FPSLogger fpsLogger;
+    @Inject
+    FPSLogger fpsLogger;
+
+    @Inject
+    InputProcessor inputProcessor;
+
+    @Inject
+    PongScreen pongScreen;
 
     @Override
     public void create() {
-        this.fpsLogger = new FPSLogger();
-        Gdx.input.setInputProcessor(new PongInputProcessor());
+        ObjectGraph objectGraph = ObjectGraph.create(new PongModule());
+        objectGraph.inject(this);
 
-        this.setScreen(new PongScreen(this));
+        Gdx.input.setInputProcessor(this.inputProcessor);
+        this.setScreen(this.pongScreen);
     }
 
     @Override
