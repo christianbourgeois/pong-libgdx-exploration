@@ -9,6 +9,6 @@ public class DesktopLauncher {
 
 	public static void main(String[] args) {
         boolean useOpenGLES2 = true;
-		new LwjglApplication(new SimplePong(), APPLICATION_NAME, SimplePong.DEFAULT_WIDTH, SimplePong.DEFAULT_HEIGHT, useOpenGLES2);
+		new LwjglApplication(new SimplePong(), APPLICATION_NAME, SimplePong.VIRTUAL_WIDTH, SimplePong.VIRTUAL_HEIGHT, useOpenGLES2);
 	}
 }

@@ -13,8 +13,8 @@ import dagger.ObjectGraph;
 
 public class SimplePong extends Game {
 	
-	public static final int DEFAULT_WIDTH = 480;
-	public static final int DEFAULT_HEIGHT = 320;
+	public static final int VIRTUAL_WIDTH = 480;
+	public static final int VIRTUAL_HEIGHT = 320;
 
     @Inject
     FPSLogger fpsLogger;
