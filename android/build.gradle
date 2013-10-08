@@ -1,6 +1,11 @@
 android {
-    buildToolsVersion "17.0"
-    compileSdkVersion 16
+    buildToolsVersion "18.1"
+    compileSdkVersion 18
+
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 16
+    }
 //    sourceSets {
 //        main {
 //            manifest.srcFile 'AndroidManifest.xml'
@@ -34,7 +39,10 @@ task copyAndroidNatives() {
         if(jar.name.endsWith("natives-armeabi-v7a.jar")) outputDir = file("libs/armeabi-v7a")
         if(jar.name.endsWith("natives-armeabi.jar")) outputDir = file("libs/armeabi")
         if(outputDir != null) {
- //           copy { from zipTree(file(jar)).matching { include "*.so" } into outputDir }
+            copy {
+                from { zipTree(file(jar)).matching { include "*.so"} }
+                into outputDir
+            }
         }
     }
 }
