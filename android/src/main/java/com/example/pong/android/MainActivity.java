@@ -18,7 +18,6 @@ public class MainActivity extends AndroidApplication {
         config.useAccelerometer = false;
         config.useCompass = false;
 
-
         this.initialize(new SimplePong(), config);
     }
 

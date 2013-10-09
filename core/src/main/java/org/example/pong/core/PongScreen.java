@@ -21,8 +21,8 @@ public class PongScreen implements Screen {
     private static final int BOX_VELOCITY_ITERATIONS = 6;
     private static final int BOX_POSITION_ITERATIONS = 2;
 
-    public static final int VIRTUAL_WIDTH = SimplePong.VIRTUAL_WIDTH;
-    public static final int VIRTUAL_HEIGHT = SimplePong.VIRTUAL_HEIGHT;
+    public static final int VIRTUAL_WIDTH = 1024;
+    public static final int VIRTUAL_HEIGHT = 768;
     private static final float ASPECT_RATIO = (float) VIRTUAL_WIDTH / (float) VIRTUAL_HEIGHT;
 
     private final Bus bus;
@@ -111,7 +111,7 @@ public class PongScreen implements Screen {
     }
 
     private Camera createCamera() {
-        Camera camera = new OrthographicCamera(SimplePong.VIRTUAL_WIDTH, SimplePong.VIRTUAL_HEIGHT);
+        Camera camera = new OrthographicCamera(1024, 768);
 //        camera.position.set(camera.viewportWidth * 0.5f, camera.viewportHeight * 0.5f, 0f);
 //        camera.update();
         return camera;

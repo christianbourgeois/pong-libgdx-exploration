@@ -1,61 +1,29 @@
 package org.example.pong.core;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-import org.example.pong.core.module.PongModule;
+import org.example.pong.screens.MainScreen;
 
-import javax.inject.Inject;
-
-import dagger.ObjectGraph;
-
-public class SimplePong extends Game {
+public class SimplePong extends BaseApplication {
 	
-	public static final int VIRTUAL_WIDTH = 480;
-	public static final int VIRTUAL_HEIGHT = 320;
-
-    @Inject
-    FPSLogger fpsLogger;
-
-    @Inject
-    InputProcessor inputProcessor;
-
-    @Inject
-    PongScreen pongScreen;
-
     @Override
-    public void create() {
-        ObjectGraph objectGraph = ObjectGraph.create(new PongModule());
-        objectGraph.inject(this);
-
-        Gdx.input.setInputProcessor(this.inputProcessor);
-        this.setScreen(this.pongScreen);
+    protected String atlasPath() {
+        return "data/tex.atlas";
     }
 
     @Override
-    public void resize(int width, int height) {
-        super.resize(width, height);
-    }
-
-    public void render() {
-        super.render();
-        this.fpsLogger.log();
+    protected void styleSkin(Skin skin, TextureAtlas atlas) {
+        new Styles().styleSkin(skin, atlas);
     }
 
     @Override
-    public void pause() {
-        super.pause();
+    protected String skinPath() {
+        return null;
     }
 
     @Override
-    public void resume() {
-        super.resume();
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
+    protected BaseScreen getFirstScreen() {
+        return new MainScreen(this);
     }
 }
