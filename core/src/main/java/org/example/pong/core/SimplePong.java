@@ -3,9 +3,17 @@ package org.example.pong.core;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-import org.example.pong.screens.MainScreen;
+import javax.inject.Inject;
 
 public class SimplePong extends BaseApplication {
+
+    private final BaseScreen firstScreen;
+
+    @Inject
+    public SimplePong(final BaseScreen firstScreen) {
+        super();
+        this.firstScreen = firstScreen;
+    }
 	
     @Override
     protected String atlasPath() {
@@ -24,6 +32,7 @@ public class SimplePong extends BaseApplication {
 
     @Override
     protected BaseScreen getFirstScreen() {
-        return new MainScreen(this);
+        //return new MainScreen(this);
+        return this.firstScreen;
     }
 }
