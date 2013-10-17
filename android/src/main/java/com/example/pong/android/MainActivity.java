@@ -23,7 +23,7 @@ public class MainActivity extends AndroidApplication {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ObjectGraph objectGraph = ObjectGraph.create(AndroidModule.class);
+        ObjectGraph.create(AndroidModule.class);
 
         this.initialize(this.pong, this.configuration);
     }

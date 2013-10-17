@@ -1,7 +1,6 @@
 package org.example.pong.desktop;
 
 import org.example.pong.core.SimplePong;
-import org.example.pong.core.module.PongModule;
 import org.example.pong.desktop.module.DesktopModule;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;

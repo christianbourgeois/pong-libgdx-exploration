@@ -5,11 +5,14 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
+import org.example.pong.core.BaseApplication;
 import org.example.pong.core.BaseScreen;
 import org.example.pong.core.PongInputProcessor;
 import org.example.pong.core.PongScreen;
+import org.example.pong.core.ScreenCoordinator;
 import org.example.pong.core.SimplePong;
-import org.example.pong.screens.MainScreen;
+import org.example.pong.core.screens.DefaultScreenCoordinator;
+import org.example.pong.core.screens.MainScreen;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -21,13 +24,18 @@ import dagger.Provides;
 public class PongModule {
 
     @Provides
-    public SimplePong providePong(@Named("main") BaseScreen firstScreen) {
-        return new SimplePong(firstScreen);
+    public ScreenCoordinator provideScreenCoordinator(@Named("main") BaseScreen firstScreen) {
+        return new DefaultScreenCoordinator(firstScreen);
+    }
+
+    @Provides
+    public BaseApplication providePong(ScreenCoordinator screenCoordinator) {
+        return new SimplePong(screenCoordinator);
     }
 
     @Provides @Named("main")
-    public BaseScreen provideMainScreen() {
-        return new MainScreen();
+    public BaseScreen provideMainScreen(BaseApplication application) {
+        return new MainScreen(application);
     }
 
     @Provides

@@ -7,12 +7,9 @@ import javax.inject.Inject;
 
 public class SimplePong extends BaseApplication {
 
-    private final BaseScreen firstScreen;
-
     @Inject
-    public SimplePong(final BaseScreen firstScreen) {
-        super();
-        this.firstScreen = firstScreen;
+    public SimplePong(final ScreenCoordinator screenCoordinator) {
+        super(screenCoordinator);
     }
 	
     @Override
@@ -28,11 +25,5 @@ public class SimplePong extends BaseApplication {
     @Override
     protected String skinPath() {
         return null;
-    }
-
-    @Override
-    protected BaseScreen getFirstScreen() {
-        //return new MainScreen(this);
-        return this.firstScreen;
     }
 }

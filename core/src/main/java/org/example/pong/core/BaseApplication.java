@@ -15,6 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public abstract class BaseApplication implements ApplicationListener {
 
+    private final ScreenCoordinator screenCoordinator;
+
     private Stage stage;
     private TextureAtlas atlas;
     private Skin skin;
@@ -32,8 +34,9 @@ public abstract class BaseApplication implements ApplicationListener {
 
     private final Color clearColor;
 
-    public BaseApplication() {
+    public BaseApplication(final ScreenCoordinator screenCoordinator) {
         super();
+        this.screenCoordinator = screenCoordinator;
         this.defaultDuration = 0.333f;
         this.clearColor = new Color(Color.BLACK);
         this.inputMultiplexer = new InputMultiplexer();
@@ -64,7 +67,7 @@ public abstract class BaseApplication implements ApplicationListener {
                 return false;
             }
         });
-        this.currentScreen = getFirstScreen().show();
+        this.currentScreen = this.screenCoordinator.getFirstScreen().show();
         this.stage.addActor(this.currentScreen);
         Gdx.input.setInputProcessor(this.inputMultiplexer);
         this.inputMultiplexer.addProcessor(this.stage);
@@ -91,8 +94,6 @@ public abstract class BaseApplication implements ApplicationListener {
     protected abstract void styleSkin(Skin skin, TextureAtlas atlas);
 
     protected abstract String skinPath();
-
-    protected abstract BaseScreen getFirstScreen();
 
     @Override
     public void render() {
